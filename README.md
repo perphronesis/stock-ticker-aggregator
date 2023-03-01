@@ -1,1 +1,3 @@
 # stock-ticker-aggregator
+
+#run
