@@ -21,8 +21,6 @@ case class Price(open:String, high:String, low:String, close: String, adjclose:S
 
 object AlphaVantageAPI extends LazyLogging with Mapper {
 
-//API Key BLY0WPDTWDJX9RZH
-
   implicit val formats: Formats = new DefaultFormats {
     override def dateFormatter = new SimpleDateFormat("yyyy-MM-dd")
   }
