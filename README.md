@@ -12,16 +12,16 @@ Prerequisites
 
 ```
 # Checkout code and build
-git clone https://github.com/perphronesis/stock-ticker-aggregator.git and cd stock-ticker-aggregator
+git clone https://github.com/perphronesis/stock-ticker-aggregator.git
+cd stock-ticker-aggregator
+sbt assembly
 
-# Customize and properties in src/main/resources/application.conf
+# Note: before building you can customize the properties in src/main/resources/application.conf
 # symbol -> ticker symbol to use in the API
 # price_field -> the price field to aggregation on.  Valid values are close, open, high, low
 # lookback_days -> number of days to calculate average
 # api_key -> AVS api key if needed in the API call.  Can set as env var
 # endpoint -> The endpoint to call in the API.  Currently this only works on the function=TIME_SERIES_DAILY_ADJUSTED endpoint
- 
-sbt assembly
 ```
 
 ### Running application
@@ -38,4 +38,9 @@ java -jar target/stock-ticker-aggregator-0.1.0.jar
 #NOTE: Substitute your APIKey in the docker build command below
 docker build -t ticker-app --build-arg JAR_FILE=stock-ticker-aggregator-0.1.0.jar --build-arg APIKEY=<APIKEY> .
 docker run --rm --name id-ticker-app ticker-app
+```
+#### Expected Results
+If works correctly, you will see something to the effect of:
+```
+5 days average close price for GOOG is $90.51
 ```
