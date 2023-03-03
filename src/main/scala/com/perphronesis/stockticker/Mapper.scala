@@ -5,8 +5,8 @@ import org.json4s.JsonAST.JValue
 trait Mapper {
 
   /*
-  The purpose of this mapping is that when we extract the JSON data into the Case Classes, case class field
-  names can support spaces - so we map the JSON fields to case class fields
+  The purpose of this mapping is that when we extract the JSON data into the case classes, field
+  names cannot support spaces - so we map the JSON fields to case class fields
    */
   val mappings: PartialFunction[(String, JValue),(String, JValue)] = {
     case ("Meta Data", x) => ("metadata", x)

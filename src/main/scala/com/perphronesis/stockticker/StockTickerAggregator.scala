@@ -37,7 +37,7 @@ object StockTickerAggregator extends App with Mapper with LazyLogging {
 
   logger.debug(s"Endpoint lookup: $endpoint")
 
-  //This is the API call and would return an Either based on success or failure of the call
+  //This is the API call and will return an Either based on success or failure of the call
   private val stockData = AlphaVantageAPI.getStockInformation(endpoint, lookback)
 
   //Wrapped aggregate function to allow for future extension of aggregation functions on collections.
@@ -66,7 +66,6 @@ object StockTickerAggregator extends App with Mapper with LazyLogging {
       case Mapper.open => source.map(_._2.openPrice)
       case Mapper.high => source.map(_._2.highPrice)
       case Mapper.low => source.map(_._2.lowPrice)
-      case Mapper.volume => source.map(_._2.volume)
       case _ => {
         logger.info("This is an unknown price field - returning on stock close price instead.")
         source.map(_._2.closePrice)

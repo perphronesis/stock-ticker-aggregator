@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import scala.util.{Failure, Success, Try}
 
+//Below are the case classes that are used to serialize the data into scala classes to make them easier to work with.
 case class StockFeed(metadata: Metadata, timeseries: Map[Date, Price])
 case class Metadata(information:String, symbol:String, lastrefreshed:Date, output:String, timezone:String)
 case class Price(open:String, high:String, low:String, close: String, adjclose:String, volumestr:String, dividend:String,coefficient:String) {
@@ -20,6 +21,12 @@ case class Price(open:String, high:String, low:String, close: String, adjclose:S
   val volume: Long = volumestr.toLong
 }
 
+/**
+ * The purpose of this object is to perform the Rest API call to ASV and if possible, serialize it into a useful case class
+ * and ultimately a collection to run functions against.
+ * If the API call or serialization is unsuccessful, the methods use Eithers and/or Try objects to capture the failure
+ * or the success for the caller to determine how to handle.
+ */
 object AlphaVantageAPI extends LazyLogging with Mapper {
 
   implicit val formats: Formats = new DefaultFormats {
@@ -84,7 +91,7 @@ object AlphaVantageAPI extends LazyLogging with Mapper {
       val parsedJson = result.transformField(mappings)
       parsedJson.extractOpt[StockFeed] match {
         case Some(x) => return Success(x)
-        case None => return Failure(new Exception("Error in calling the API: " + httpResponse.body))
+        case None => return Failure(new Exception("Are you calling the TIME_SERIES_DAILY_ADJUSTED function with valid APIKEY? " + httpResponse.body))
       }
     } catch {
       case e: Throwable => return Failure(new Exception("Error in calling the API: " + e.toString))
