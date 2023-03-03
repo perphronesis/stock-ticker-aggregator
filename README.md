@@ -29,7 +29,7 @@ sbt assembly
 #### Option 1: Run locally
 ```
 # If needed set API_KEY from AVS as an env variable:
-export API_KEY=XXXX
+export APIKEY=XXXX
 java -jar target/stock-ticker-aggregator-0.1.0.jar
 ```
 
