@@ -1,8 +1,8 @@
-ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / version := "0.1.0"
 
 ThisBuild / scalaVersion := "2.13.10"
 
-name := "stock-ticker-app"
+name := "stock-ticker-aggregator"
 
 resolvers ++= Seq(
   "Maven Central" at "https://repo1.maven.org/maven2/"
@@ -19,7 +19,6 @@ crossPaths := false
 assembly / assemblyJarName := s"${name.value}-${version.value}.jar"
 
 assembly / assemblyMergeStrategy := {
-  //case PathList("META-INF", xs @ _*) => MergeStrategy.discard
   case PathList("META-INF", xs@_*) =>
     (xs map {
       _.toLowerCase
@@ -31,7 +30,7 @@ assembly / assemblyMergeStrategy := {
   case x => MergeStrategy.first
 }
 
-lazy val root = (project in file("."))
-  .settings(
-    name := "stock-ticker-app"
-  )
+//lazy val root = (project in file("."))
+//  .settings(
+//    name := "stock-ticker-app"
+//  )
