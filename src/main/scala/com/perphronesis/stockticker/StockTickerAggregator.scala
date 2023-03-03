@@ -10,7 +10,7 @@ import scala.math.pow
 
 /**
  * Main entry point for the application.  This performs the following steps:
- * 1. Checks that the APIKEY env variable is set - if not, exists
+ * 1. Checks that the APIKEY env variable is set - if not, exits
  * 2. Pulls config info from the applicaiton.conf file that allows some customization of the lookup
  * 3. Calls the ASV API and returns a scala Either which allows us to determine success or failure of the call
  * 4. If success (Right) - calculate the Average price based on the price field in the config file.  If the price field
