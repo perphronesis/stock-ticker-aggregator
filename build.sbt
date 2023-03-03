@@ -29,8 +29,3 @@ assembly / assemblyMergeStrategy := {
     }
   case x => MergeStrategy.first
 }
-
-//lazy val root = (project in file("."))
-//  .settings(
-//    name := "stock-ticker-app"
-//  )
